@@ -70,7 +70,7 @@ The default `.env` path is beside the script, independent of the terminal's work
 
 ## The requests
 
-The supplied HAR revealed these two read-only GET endpoints under `https://www.showcasecinemas.com`:
+We use these two read-only GET endpoints under `https://www.showcasecinemas.com`:
 
 1. `/api/gatsby-source-boxofficeapi/schedule` returns showtimes grouped by theater ID, movie ID, and date.
 2. `/api/gatsby-source-boxofficeapi/movies` returns movie titles for repeated `ids` parameters.
@@ -88,23 +88,3 @@ to=2026-10-21T03:00:00
 ```text
 /api/gatsby-source-boxofficeapi/movies?basic=false&castingLimit=3&ids=MOVIE_ID_1&ids=MOVIE_ID_2
 ```
-
-The captured `scheduledMovies?theaterId=X00UF` request is unnecessary for this lookup. The schedule already supplies the relevant movie IDs. These are website endpoints rather than a documented public API, so future site changes may require an update.
-
-## Replay the supplied archive
-
-This reads saved response bodies without making network requests. It only accepts a date for which that archive contains a matching schedule request and labels the output as archived.
-
-```powershell
-node showcase.mjs --date 2026-10-20 --har 'C:\Users\kenny\Downloads\www.showcasecinemas.com_Archive [26-10-15 15-40-21].har'
-```
-
-The raw HAR is not copied into this project. Network archives can contain unrelated session information.
-
-## Verification
-
-```powershell
-npm test
-```
-
-Date-selection tests cover Tuesday mornings, the active window, its exact end, custom end times, Eastern calendar dates, daylight saving time, overrides, and year rollover. Email tests cover configuration, recipient validation, message composition, Gmail transport settings, errors, partial delivery, and a complete CLI dry run. Email verification uses local transports and fake credentials; it does not send real mail. Archive replay and a live lookup for October 20, 2026 both returned the same seven matching screenings during initial development.
