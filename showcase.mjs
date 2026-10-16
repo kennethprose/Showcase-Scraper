@@ -224,7 +224,7 @@ export function formatText(result) {
 
 async function main() {
   const { values } = parseArgs({ options: {
-    date: { type: 'string' }, start: { type: 'string', default: '17:30' },
+    date: { type: 'string' }, start: { type: 'string', default: '17:00' },
     end: { type: 'string', default: '19:30' }, json: { type: 'boolean' },
     har: { type: 'string' }, 'include-today': { type: 'boolean' },
     email: { type: 'boolean' }, 'env-file': { type: 'string' },
@@ -232,7 +232,7 @@ async function main() {
     help: { type: 'boolean', short: 'h' },
   } });
   if (values.help) {
-    console.log('Usage: node showcase.mjs [--date YYYY-MM-DD] [--start 17:30] [--end 19:30] [--json] [--har FILE] [--include-today] [--email [--dry-run] [--env-file FILE]]\nDefaults: Farmingdale, next Tuesday (today on Tuesday until the window ends), 5-7 PM Eastern inclusive.\n--include-today forces today on Tuesday, even after the window ends. --date overrides that choice.\n--email sends results via Gmail using .env beside this script. --dry-run previews without sending.\nRequires Node.js 18.17 or newer. Email support requires npm install.');
+    console.log('Usage: node showcase.mjs [--date YYYY-MM-DD] [--start 17:00] [--end 19:30] [--json] [--har FILE] [--include-today] [--email [--dry-run] [--env-file FILE]]\nDefaults: Farmingdale, next Tuesday (today on Tuesday until the window ends), 5-7 PM Eastern inclusive.\n--include-today forces today on Tuesday, even after the window ends. --date overrides that choice.\n--email sends results via Gmail using .env beside this script. --dry-run previews without sending.\nRequires Node.js 18.17 or newer. Email support requires npm install.');
     return;
   }
   if (!values.email && (values['dry-run'] || values['env-file'])) {
